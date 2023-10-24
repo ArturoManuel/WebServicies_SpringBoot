@@ -8,11 +8,9 @@ import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,10 +24,22 @@ public class EmployeeController {
     @GetMapping("/listar")
     List<Employees> listarEmployees(){return employeesRepository.findAll();}
 
- 
+
     @GetMapping("/buscar")
-    Optional<Employees> buscarEmployees(@RequestParam("id") Integer id){
-        return employeesRepository.findById(id);}
+    public List<Employees> buscarEmployees(@RequestParam("id") Integer id){
+        Employees employee = employeesRepository.findById(id).orElse(null);
+        List<Employees> result = new ArrayList<>();
+        if(employee != null) {
+            result.add(employee);
+        }
+        return result;
+    }
+
+    @PutMapping("/actualizar-comentario/{employeeId}")
+    public void updateEmployeeComment(@PathVariable Integer employeeId) {
+        employeesRepository.updateEmployee(employeeId);
+    }
+
 
 
     @GetMapping("/byManager")

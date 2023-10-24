@@ -2,6 +2,7 @@ package com.example.lab04_20190411_20181650.repository;
 
 import com.example.lab04_20190411_20181650.entity.Employees;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -22,6 +23,24 @@ public interface EmployeesRepository extends JpaRepository<Employees, Integer> {
             "LEFT JOIN regions r ON c.region_id = r.region_id " +
             "WHERE e.employee_id = :employeeId", nativeQuery = true)
     List<Object[]> findCompleteEmployeeInfoByEmployeeId(@Param("employeeId") Integer employeeId);
+
+
+    @Modifying
+    @Query(value = "UPDATE employees\n" +
+            "    SET employee_feedback = 'Comentario recibido'\n" +
+            "    WHERE employee_id = :employeeId",nativeQuery = true)
+    void updateEmployee(@Param("employeeId") Integer employeeId);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
