@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,10 +27,10 @@ public interface EmployeesRepository extends JpaRepository<Employees, Integer> {
 
 
     @Modifying
-    @Query(value = "UPDATE employees\n" +
-            "    SET employee_feedback = 'Comentario recibido'\n" +
-            "    WHERE employee_id = :employeeId",nativeQuery = true)
-    void updateEmployee(@Param("employeeId") Integer employeeId);
+    @Transactional
+    @Query(value = "UPDATE employees SET employee_feedback = :feedback WHERE employee_id = :employeeId", nativeQuery = true)
+    void updateEmployeeFeedback(@Param("employeeId") Integer employeeId, @Param("feedback") String feedback);
+
 
 
 
