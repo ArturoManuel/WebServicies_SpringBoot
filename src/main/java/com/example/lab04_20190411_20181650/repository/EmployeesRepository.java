@@ -32,6 +32,14 @@ public interface EmployeesRepository extends JpaRepository<Employees, Integer> {
     void updateEmployeeFeedback(@Param("employeeId") Integer employeeId, @Param("feedback") String feedback);
 
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE employees SET meeting = 1 WHERE employee_id = :employeeId AND manager_id = :managerId", nativeQuery = true)
+    void updateMeetingStatus(@Param("employeeId") Integer employeeId, @Param("managerId") Integer managerId);
+
+
+
+
 
 
 

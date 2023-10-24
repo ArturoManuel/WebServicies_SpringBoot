@@ -53,4 +53,15 @@ public class EmployeeController {
         }
     }
 
+    @PostMapping("/updateMeeting")
+    public ResponseEntity<String> updateEmployeeMeetingStatus(@RequestParam("employeeId") Integer employeeId, @RequestParam("managerId") Integer managerId) {
+        try {
+            employeesRepository.updateMeetingStatus(employeeId, managerId);
+            return new ResponseEntity<>("Se ejecuto el api", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al ejecutar el api", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }
