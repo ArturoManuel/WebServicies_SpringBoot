@@ -1,18 +1,55 @@
 Este código pertenece a un servicio web Spring Boot diseñado para gestionar operaciones relacionadas con empleados en una base de datos MySQL. El servicio ofrece una API REST con varias endpoints que permiten realizar consultas y actualizaciones sobre la información de los empleados.
 
-Descripción general de los endpoints:
+## Endpoints
 
-GET /employees/listar: Retorna una lista de todos los empleados disponibles en la base de datos. No requiere parámetros y devuelve una lista de objetos Employees.
+1. **List Employees**
+    - Endpoint: `GET /employees/listar`
+    - Description: Returns a list of all employees in the database.
+    - Example:
+      ```bash
+      curl -X GET http://localhost:8080/employees/listar
+      ```
 
-GET /employees/buscar: Busca un empleado específico por su id. El id se pasa como parámetro de consulta y el endpoint devuelve una lista con un solo empleado o una lista vacía si el empleado no se encuentra.
+2. **Search Employee**
+    - Endpoint: `GET /employees/buscar?id={id}`
+    - Description: Retrieves the details of a specific employee by their ID.
+    - Example:
+      ```bash
+      curl -X GET http://localhost:8080/employees/buscar?id=1
+      ```
 
-GET /employees/byManager: Obtiene una lista de empleados que están bajo un gerente específico. El managerId se pasa como un parámetro de consulta y devuelve una lista de empleados ordenados por nombre y apellido.
+3. **Employees by Manager**
+    - Endpoint: `GET /employees/byManager?managerId={managerId}`
+    - Description: Lists all employees who report to a specified manager.
+    - Example:
+      ```bash
+      curl -X GET http://localhost:8080/employees/byManager?managerId=2
+      ```
 
-GET /employees/completeInfo: Proporciona información completa de un empleado, incluyendo detalles del trabajo, historial laboral, departamento, ubicación, país y región. El employeeId se pasa como un parámetro de consulta y devuelve un array de objetos con toda la información relacionada.
+4. **Complete Employee Information**
+    - Endpoint: `GET /employees/completeInfo?employeeId={employeeId}`
+    - Description: Provides detailed information about an employee.
+    - Example:
+      ```bash
+      curl -X GET http://localhost:8080/employees/completeInfo?employeeId=3
+      ```
 
-POST /employees/updateFeedback: Actualiza el feedback de un empleado. Se requieren dos parámetros de consulta: employeeId para identificar al empleado y feedback que contiene el nuevo comentario o retroalimentación. Devuelve una respuesta indicando si la actualización fue exitosa o si hubo un error.
+5. **Update Feedback**
+    - Endpoint: `POST /employees/updateFeedback`
+    - Description: Updates the feedback for an employee.
+    - Example:
+      ```bash
+      curl -X POST -d "employeeId=4&feedback=Great job!" http://localhost:8080/employees/updateFeedback
+      ```
 
-POST /employees/updateMeeting: Actualiza el estado de la reunión de un empleado con un gerente. Se pasan employeeId y managerId como parámetros de consulta para identificar la reunión a actualizar. La respuesta indica si la ejecución fue exitosa o si ocurrió un error.
+6. **Update Meeting Status**
+    - Endpoint: `POST /employees/updateMeeting`
+    - Description: Updates the status of a meeting between an employee and their manager.
+    - Example:
+      ```bash
+      curl -X POST -d "employeeId=5&managerId=3" http://localhost:8080/employees/updateMeeting
+      ```
+
 
 La clase EmployeeController es un controlador REST que utiliza EmployeesRepository para interactuar con la base de datos MySQL. EmployeesRepository es una interfaz que extiende JpaRepository, proporcionando métodos CRUD estándar junto con operaciones personalizadas definidas mediante anotaciones @Query.
 
