@@ -17,16 +17,20 @@ Este código pertenece a un servicio web Spring Boot diseñado para gestionar op
     - Description: Retrieves the details of a specific employee by their ID.
     - Example:
       ```bash
-      curl -X GET http://localhost:8080/employees/buscar?id=1
+      curl -X GET http://localhost:8080/employees/buscar?id=100
       ```
+![image](https://github.com/ArturoManuel/WebServicies_SpringBoot/assets/90386913/a342f9d9-90ea-449d-81e4-4f4e8a4514bb)
+
 
 3. **Employees by Manager**
     - Endpoint: `GET /employees/byManager?managerId={managerId}`
     - Description: Lists all employees who report to a specified manager.
     - Example:
       ```bash
-      curl -X GET http://localhost:8080/employees/byManager?managerId=2
+      curl -X GET http://localhost:8080/employees/byManager?managerId=100
       ```
+![image](https://github.com/ArturoManuel/WebServicies_SpringBoot/assets/90386913/e78f8d1b-84f2-4931-a553-3d0927b87e17)
+
 
 4. **Complete Employee Information**
     - Endpoint: `GET /employees/completeInfo?employeeId={employeeId}`
