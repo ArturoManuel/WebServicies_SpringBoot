@@ -9,6 +9,8 @@ Este código pertenece a un servicio web Spring Boot diseñado para gestionar op
       ```bash
       curl -X GET http://localhost:8080/employees/listar
       ```
+![image](https://github.com/ArturoManuel/WebServicies_SpringBoot/assets/90386913/6cb1588c-24a7-4499-98f8-018c40a88fe6)
+
 
 2. **Search Employee**
     - Endpoint: `GET /employees/buscar?id={id}`
